@@ -19,6 +19,7 @@ public enum ErrorCode {
     USER_ALREADY_IN_CLASSROOM(1010, "User has already in this classroom", HttpStatus.BAD_REQUEST),
     USER_NOT_IN_CLASSROOM(1011, "User is not in this classroom", HttpStatus.BAD_REQUEST),
     USER_NOT_IN_ANY_CLASSROOM(1012, "User is not in any classroom", HttpStatus.BAD_REQUEST),
+    INVALID_ROLL_CALL_TIME(1013, "Invalid roll call time", HttpStatus.BAD_REQUEST),
 
     ;
 
