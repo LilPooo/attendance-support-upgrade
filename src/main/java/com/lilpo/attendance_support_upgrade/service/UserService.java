@@ -1,10 +1,11 @@
 package com.lilpo.attendance_support_upgrade.service;
 
+import com.lilpo.attendance_support_upgrade.constant.PredefinedRole;
 import com.lilpo.attendance_support_upgrade.dto.request.UserCreationRequest;
 import com.lilpo.attendance_support_upgrade.dto.request.UserUpdateRequest;
 import com.lilpo.attendance_support_upgrade.dto.response.UserResponse;
+import com.lilpo.attendance_support_upgrade.entity.Role;
 import com.lilpo.attendance_support_upgrade.entity.User;
-import com.lilpo.attendance_support_upgrade.enums.Role;
 import com.lilpo.attendance_support_upgrade.exception.AppException;
 import com.lilpo.attendance_support_upgrade.exception.ErrorCode;
 import com.lilpo.attendance_support_upgrade.mapper.UserMapper;
@@ -43,11 +44,10 @@ public class UserService {
         User user = userMapper.toUser(request);
         user.setPassword(passwordEncoder.encode(request.getPassword()));
 
-        HashSet<String> roles = new HashSet<>();
-        roles.add(Role.USER.name());
+        HashSet<Role> roles = new HashSet<>();
+        roleRepository.findById(PredefinedRole.USER_ROLE).ifPresent(roles::add);
 
-//        user.setRoles(roles);
-
+        user.setRoles(roles);
         return userMapper.toUserResponse(userRepository.save(user));
     }
 
@@ -74,7 +74,7 @@ public class UserService {
         var roles = roleRepository.findAllById(request.getRoles());
         user.setRoles(new HashSet<>(roles));
 
-        
+
         return userMapper.toUserResponse(userRepository.save(user));
     }
 
