@@ -1,5 +1,6 @@
 package com.lilpo.attendance_support_upgrade.entity;
 
+import com.lilpo.attendance_support_upgrade.enums.DayOfWeek;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -42,4 +43,8 @@ public class Classroom {
 
     @OneToMany(mappedBy = "classroom", cascade = CascadeType.ALL, orphanRemoval = true)
     Set<CheckIn> checkIns;
+
+    @ElementCollection
+    @Enumerated(EnumType.STRING)
+    Set<DayOfWeek> daysOfWeek;
 }

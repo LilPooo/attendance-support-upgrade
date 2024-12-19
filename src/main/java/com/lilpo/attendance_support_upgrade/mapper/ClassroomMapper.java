@@ -5,6 +5,7 @@ import com.lilpo.attendance_support_upgrade.dto.request.ClassroomUpdateRequest;
 import com.lilpo.attendance_support_upgrade.dto.response.ClassroomResponse;
 import com.lilpo.attendance_support_upgrade.entity.Classroom;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 
 @Mapper(componentModel = "spring")
@@ -12,8 +13,8 @@ import org.mapstruct.MappingTarget;
 public interface ClassroomMapper {
     Classroom toClassroom(ClassroomCreationRequest request);
 
+    @Mapping(target = "daysOfWeek", source = "daysOfWeek")
     ClassroomResponse toClassroomResponse(Classroom classroom);
 
-    //    @Mapping(target = "roles", ignore = true)
     void updateClassroom(@MappingTarget Classroom classroom, ClassroomUpdateRequest request);
 }

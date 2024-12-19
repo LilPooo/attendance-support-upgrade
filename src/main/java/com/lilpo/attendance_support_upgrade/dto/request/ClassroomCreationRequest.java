@@ -1,9 +1,11 @@
 package com.lilpo.attendance_support_upgrade.dto.request;
 
+import com.lilpo.attendance_support_upgrade.enums.DayOfWeek;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.time.LocalTime;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -28,4 +30,6 @@ public class ClassroomCreationRequest {
     int endWeek;
 
     String name;
+
+    Set<DayOfWeek> daysOfWeek;
 }
