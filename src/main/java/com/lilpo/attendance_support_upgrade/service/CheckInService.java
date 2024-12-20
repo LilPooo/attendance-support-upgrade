@@ -34,7 +34,7 @@ public class CheckInService {
 
 
     //    @Value("${allowed.distance}")
-    double allowedDistance = 100;
+    public double allowedDistance = 100;
 
     public void updateRollCallTime(Long classroomId, ClassroomPatchRequest request) {
         Classroom classroom = classroomRepository.findById(classroomId)
@@ -54,10 +54,15 @@ public class CheckInService {
         classroomRepository.save(classroom);
 
 
-        List<UserClassroom> userClassrooms = userClassroomRepository.findByClassroom(classroom);
+        List<UserClassroom> userClassrooms = userClassroomRepository.findStudentUserClassrooms(classroom);
 
         for (UserClassroom userClassroom : userClassrooms) {
             User user = userClassroom.getUser();
+
+
+//            if (user.getRoles().stream().noneMatch(role -> role.getName().equals("STUDENT"))) {
+//                continue;
+//            }
 
             CheckIn checkIn = CheckIn.builder()
                     .user(user)
@@ -105,6 +110,27 @@ public class CheckInService {
             checkIn.setStatus(true);
             checkInRepository.save(checkIn);
         }
+
+    }
+
+    public void teacherCheckIn(String username, Long classroomId) {
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXISTED));
+
+        Classroom classroom = classroomRepository.findById(classroomId)
+                .orElseThrow(() -> new AppException(ErrorCode.CLASSROOM_NOT_EXISTED));
+
+        LocalDate today = LocalDate.now();
+        List<CheckIn> checkIns = checkInRepository.findByUserAndClassroomAndDate(user, classroom, today);
+
+        if (checkIns == null || checkIns.isEmpty()) {
+            throw new AppException(ErrorCode.CHECK_IN_RECORD_NOT_FOUND);
+        }
+
+        for (CheckIn checkIn : checkIns) {
+            checkIn.setStatus(true);
+        }
+        checkInRepository.saveAll(checkIns);
 
     }
 

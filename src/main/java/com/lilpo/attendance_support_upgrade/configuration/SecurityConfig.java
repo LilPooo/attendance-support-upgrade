@@ -25,6 +25,8 @@ import javax.crypto.spec.SecretKeySpec;
 public class SecurityConfig {
     private final String[] PUBLIC_ENDPOINTS = {
             "/users", "/auth/token", "/auth/introspect", "/auth/logout", "/auth/refresh",
+            "identity/swagger-ui/**", "/swagger-resources/**", "/swagger-ui.html/**",
+
 
     };
 
