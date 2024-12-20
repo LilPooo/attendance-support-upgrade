@@ -19,13 +19,16 @@ public enum ErrorCode {
     USER_ALREADY_IN_CLASSROOM(1010, "User has already in this classroom", HttpStatus.BAD_REQUEST),
     USER_NOT_IN_CLASSROOM(1011, "User is not in this classroom", HttpStatus.BAD_REQUEST),
     USER_NOT_IN_ANY_CLASSROOM(1012, "User is not in any classroom", HttpStatus.BAD_REQUEST),
-    INVALID_ROLL_CALL_TIME(1013, "Invalid roll call time", HttpStatus.BAD_REQUEST),
-
+    INVALID_ROLL_CALL_TIME(1013, "Invalid roll call time: start time must be before end time and cannot be null", HttpStatus.BAD_REQUEST),
+    INVALID_DEVICE_ID(1014, "Invalid Device Id", HttpStatus.BAD_REQUEST),
+    INVALID_ROLL_CALL_CHECK_IN(1015, "It is not the right time for check in", HttpStatus.BAD_REQUEST),
+    USER_TOO_FAR_FROM_CLASSROOM(1016, "You are too far from the classroom", HttpStatus.BAD_REQUEST),
+    CHECK_IN_RECORD_NOT_FOUND(1017, "Check in record not found", HttpStatus.NOT_FOUND),
     ;
 
-    private int code;
-    private String message;
-    private HttpStatusCode statusCode;
+    private final int code;
+    private final String message;
+    private final HttpStatusCode statusCode;
 
     ErrorCode(int code, String message, HttpStatusCode statusCode) {
         this.code = code;

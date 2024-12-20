@@ -4,7 +4,6 @@ package com.lilpo.attendance_support_upgrade.configuration;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lilpo.attendance_support_upgrade.dto.ApiResponse;
 import com.lilpo.attendance_support_upgrade.exception.ErrorCode;
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.MediaType;
@@ -17,7 +16,7 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
 
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException)
-            throws IOException, ServletException {
+            throws IOException {
         ErrorCode errorCode = ErrorCode.UNAUTHENTICATED;
 
         response.setStatus(errorCode.getStatusCode().value());
