@@ -1,6 +1,7 @@
 package com.lilpo.attendance_support_upgrade.controller;
 
 import com.lilpo.attendance_support_upgrade.dto.ApiResponse;
+import com.lilpo.attendance_support_upgrade.dto.PageResponse;
 import com.lilpo.attendance_support_upgrade.dto.request.ClassroomCreationRequest;
 import com.lilpo.attendance_support_upgrade.dto.request.ClassroomUpdateRequest;
 import com.lilpo.attendance_support_upgrade.dto.response.ClassroomResponse;
@@ -32,6 +33,18 @@ public class ClassroomController {
     ApiResponse<List<ClassroomResponse>> getClassrooms() {
         return ApiResponse.<List<ClassroomResponse>>builder()
                 .result(classroomService.getClassrooms())
+                .build();
+    }
+
+    //Get all classrooms using Pagination
+    @GetMapping("/pagination")
+    ApiResponse<PageResponse<ClassroomResponse>> getClassroomsPagination(
+            @RequestParam(value = "page", required = false, defaultValue = "1") int page,
+            @RequestParam(value = "size", required = false, defaultValue = "5") int size
+
+    ) {
+        return ApiResponse.<PageResponse<ClassroomResponse>>builder()
+                .result(classroomService.getClassroomsPagination(page, size))
                 .build();
     }
 

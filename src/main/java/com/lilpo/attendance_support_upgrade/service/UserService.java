@@ -1,6 +1,7 @@
 package com.lilpo.attendance_support_upgrade.service;
 
 import com.lilpo.attendance_support_upgrade.constant.PredefinedRole;
+import com.lilpo.attendance_support_upgrade.dto.PageResponse;
 import com.lilpo.attendance_support_upgrade.dto.request.UserCreationRequest;
 import com.lilpo.attendance_support_upgrade.dto.request.UserUpdateRequest;
 import com.lilpo.attendance_support_upgrade.dto.response.UserResponse;
@@ -15,6 +16,10 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -55,6 +60,28 @@ public class UserService {
     public List<UserResponse> getUsers() {
         log.info("In method get Users");
         return userRepository.findAll().stream().map(userMapper::toUserResponse).toList();
+    }
+
+    // Return all users with Pagination
+    @PreAuthorize("hasRole('ADMIN')")
+    public PageResponse<UserResponse> getUsersPagination(int page, int size) {
+//        return userRepository.findAll().stream().map(userMapper::toUserResponse).toList();
+
+        Sort sort = Sort.by("username").ascending();
+        Pageable pageable = PageRequest.of(page - 1, size, sort);
+        Page<User> pageData = userRepository.findAll(pageable);
+
+        List<UserResponse> userResponses = pageData.getContent().stream()
+                .map(userMapper::toUserResponse)
+                .toList();
+        return PageResponse.<UserResponse>builder()
+
+                .currentPage(page)
+                .totalPages(pageData.getTotalPages())
+                .pageSize(pageData.getSize())
+                .totalElements(pageData.getTotalElements())
+                .data(userResponses)
+                .build();
     }
 
     @PostAuthorize("returnObject.username == authentication.name")

@@ -1,6 +1,7 @@
 package com.lilpo.attendance_support_upgrade.controller;
 
 import com.lilpo.attendance_support_upgrade.dto.ApiResponse;
+import com.lilpo.attendance_support_upgrade.dto.PageResponse;
 import com.lilpo.attendance_support_upgrade.dto.request.UserCreationRequest;
 import com.lilpo.attendance_support_upgrade.dto.request.UserUpdateRequest;
 import com.lilpo.attendance_support_upgrade.dto.response.UserResponse;
@@ -42,6 +43,22 @@ public class UserController {
                 .result(userService.getUsers())
                 .build();
     }
+
+    @GetMapping("/pagination")
+    ApiResponse<PageResponse<UserResponse>> getUsersPagination(
+            @RequestParam(value = "page", required = false, defaultValue = "1") int page,
+            @RequestParam(value = "size", required = false, defaultValue = "10") int size
+    ) {
+        var authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        authentication.getAuthorities().forEach(grantedAuthority -> log.info(grantedAuthority.getAuthority()));
+
+
+        return ApiResponse.<PageResponse<UserResponse>>builder()
+                .result(userService.getUsersPagination(page, size))
+                .build();
+    }
+
 
     @GetMapping("/{userId}")
     ApiResponse<UserResponse> getUser(@PathVariable("userId") String userId) {
