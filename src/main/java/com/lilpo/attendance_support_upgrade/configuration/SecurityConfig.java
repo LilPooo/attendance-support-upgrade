@@ -3,7 +3,6 @@ package com.lilpo.attendance_support_upgrade.configuration;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -25,9 +24,10 @@ import javax.crypto.spec.SecretKeySpec;
 public class SecurityConfig {
     private final String[] PUBLIC_ENDPOINTS = {
             "/users", "/auth/token", "/auth/introspect", "/auth/logout", "/auth/refresh",
-            "identity/swagger-ui/**", "/swagger-resources/**", "/swagger-ui.html/**",
-
-
+            "/identity/swagger-ui/**", "/swagger-ui/**", "/swagger-resources/**", "/v3/api-docs/**",
+            "/swagger-ui.html/**",
+            "/identity/swagger-resources/**",
+            "/identity/v3/api-docs/**", "/identity/swagger-ui.html/**"
     };
 
     @Value("${jwt.signerKey}")
@@ -36,11 +36,9 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeHttpRequests(request ->
-                        request.requestMatchers(HttpMethod.POST, PUBLIC_ENDPOINTS).permitAll()
-//                        .requestMatchers(HttpMethod.POST, PUBLIC_ENDPOINTS).permitAll()
-//                        .requestMatchers(HttpMethod.PUT, PUBLIC_ENDPOINTS).permitAll()
-//                                .requestMatchers(HttpMethod.GET, "/users/").hasAuthority("SCOPE_ADMIN")
-//                                .requestMatchers(HttpMethod.GET, "/users/").hasRole("ADMIN")
+                        request.requestMatchers(PUBLIC_ENDPOINTS).permitAll()
+//                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html").permitAll()
+
                                 .anyRequest()
                                 .authenticated()
         );
@@ -55,6 +53,7 @@ public class SecurityConfig {
         httpSecurity.csrf(AbstractHttpConfigurer::disable);
         return httpSecurity.build();
     }
+
 
     @Bean
     JwtAuthenticationConverter jwtAuthenticationConverter() {
