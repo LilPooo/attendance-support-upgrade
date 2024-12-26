@@ -1,9 +1,12 @@
 package com.lilpo.attendance_support_upgrade.service;
 
 import com.lilpo.attendance_support_upgrade.dto.request.AuthenticationRequest;
+import com.lilpo.attendance_support_upgrade.dto.request.AuthenticationWithRoleRequest;
 import com.lilpo.attendance_support_upgrade.dto.request.IntrospectRequest;
 import com.lilpo.attendance_support_upgrade.dto.response.AuthenticationResponse;
+import com.lilpo.attendance_support_upgrade.dto.response.AuthenticationWithRoleResponse;
 import com.lilpo.attendance_support_upgrade.dto.response.IntrospectResponse;
+import com.lilpo.attendance_support_upgrade.entity.Role;
 import com.lilpo.attendance_support_upgrade.entity.User;
 import com.lilpo.attendance_support_upgrade.exception.AppException;
 import com.lilpo.attendance_support_upgrade.exception.ErrorCode;
@@ -28,6 +31,7 @@ import java.text.ParseException;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
+import java.util.List;
 import java.util.StringJoiner;
 
 @Service
@@ -73,6 +77,29 @@ public class AuthenticationService {
         return AuthenticationResponse.builder()
                 .token(token)
                 .authenticated(true)
+                .build();
+    }
+
+    public AuthenticationWithRoleResponse authenticateWithRole(AuthenticationWithRoleRequest request) {
+        User user = userRepository.findByUsername(request.getUsername())
+                .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXISTED));
+
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);
+        boolean authenticated = passwordEncoder.matches(request.getPassword(),
+                user.getPassword());
+
+        List<String> roles = user.getRoles().stream()
+                .map(Role::getName)
+                .toList();
+
+        if (!authenticated) {
+            throw new AppException(ErrorCode.UNAUTHENTICATED);
+        }
+        var token = generateToken(user);
+
+        return AuthenticationWithRoleResponse.builder()
+                .token(token)
+                .roles(roles)
                 .build();
     }
 

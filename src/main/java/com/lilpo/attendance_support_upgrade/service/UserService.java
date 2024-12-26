@@ -42,6 +42,7 @@ public class UserService {
     PasswordEncoder passwordEncoder;
 
     public UserResponse createUser(UserCreationRequest request) {
+        log.info("Received deviceID: {}", request.getDeviceId()); // Log deviceID
 
         if (userRepository.existsByUsername(request.getUsername())) {
             throw new AppException(ErrorCode.USER_EXISTED);
@@ -117,6 +118,13 @@ public class UserService {
                 () -> new AppException(ErrorCode.USER_NOT_EXISTED)
         );
         return userMapper.toUserResponse(user);
+    }
+
+    public List<UserResponse> searchUsersByName(String keyword, int size) {
+        Pageable pageable = PageRequest.of(0, size);
+        return userRepository.findByUsernameContaining(keyword, pageable)
+                .map(userMapper::toUserResponse)
+                .toList();
     }
 
 }

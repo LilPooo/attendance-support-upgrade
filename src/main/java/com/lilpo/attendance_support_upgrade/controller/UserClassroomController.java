@@ -65,4 +65,11 @@ public class UserClassroomController {
                 .result(userClassroomService.getClassScheduleByUsername(username))
                 .build();
     }
+
+    @GetMapping("/schedule-by-userId/{userId}")
+    public ApiResponse<List<ClassroomResponse>> getClassScheduleByUserId(@PathVariable("userId") String userId) {
+        return ApiResponse.<List<ClassroomResponse>>builder()
+                .result(userClassroomService.getClassScheduleByUserId(userId))
+                .build();
+    }
 }

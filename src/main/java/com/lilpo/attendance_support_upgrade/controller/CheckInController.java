@@ -53,12 +53,31 @@ public class CheckInController {
                 .build();
     }
 
-    @PostMapping("/teacher/{username}/{classroomId}")
-    public ApiResponse<String> teacherCheckIn(
-            @PathVariable("username") String username,
-            @PathVariable("classroomId") Long classroomId
+    @PostMapping("/student/using-userId/{classroomId}/{userId}")
+    public ApiResponse<String> studentCheckInByUserId(
+            @PathVariable("userId") String userId,
+            @PathVariable("classroomId") Long classroomId,
+            @RequestBody CheckInStudentRequest request
     ) {
-        checkInService.teacherCheckIn(username, classroomId);
+        checkInService.studentCheckInByUserId(
+                userId,
+                classroomId,
+                request.getDeviceId(),
+                request.getLongitude(),
+                request.getLatitude()
+        );
+        return ApiResponse.<String>builder()
+                .result("Student check in successfully")
+                .build();
+    }
+
+    @PostMapping("/teacher/{classroomId}/{userId}")
+    public ApiResponse<String> teacherCheckIn(
+            @PathVariable("classroomId") Long classroomId,
+            @PathVariable("userId") String userId,
+            @RequestParam("status") boolean status
+    ) {
+        checkInService.teacherCheckIn(userId, classroomId, status);
         return ApiResponse.<String>builder()
                 .result("The teacher has successfully checked manually.")
                 .build();

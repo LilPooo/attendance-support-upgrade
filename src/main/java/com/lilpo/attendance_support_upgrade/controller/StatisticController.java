@@ -40,6 +40,7 @@ public class StatisticController {
                 .build();
     }
 
+    //Count for a class
     @GetMapping("/teacher/absences/classroom/{classroomId}")
     public ApiResponse<List<StudentAbsenceSummaryResponse>> getStudentAbsencesClassroom(@PathVariable("classroomId") Long classroomId) {
         return ApiResponse.<List<StudentAbsenceSummaryResponse>>builder()

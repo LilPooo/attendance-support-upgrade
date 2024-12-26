@@ -106,4 +106,15 @@ public class UserClassroomService {
                 .map(classroomMapper::toClassroomResponse)
                 .toList();
     }
+
+    public List<ClassroomResponse> getClassScheduleByUserId(String userId) {
+        List<Classroom> classrooms = userClassroomRepository.findClassroomByUserId(userId);
+        if (classrooms.isEmpty()) {
+            throw new AppException(ErrorCode.USER_NOT_IN_CLASSROOM);
+        }
+
+        return classrooms.stream()
+                .map(classroomMapper::toClassroomResponse)
+                .toList();
+    }
 }

@@ -17,6 +17,9 @@ public interface UserClassroomRepository extends JpaRepository<UserClassroom, Lo
 
     Optional<UserClassroom> findByUserIdAndClassroomId(String userId, Long classroomId);
 
+    @Query("SELECT uc.classroom from  UserClassroom uc where uc.user.id=:userId and uc.active = true")
+    List<Classroom> findClassroomByUserId(String userId);
+
     Optional<UserClassroom> findByUserAndClassroom(User user, Classroom classroom);
 
     @Query("SELECT uc.classroom FROM UserClassroom uc JOIN uc.user u where u.username = :username AND uc.active = true")

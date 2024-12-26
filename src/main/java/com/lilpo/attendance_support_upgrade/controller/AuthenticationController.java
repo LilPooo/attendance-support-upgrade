@@ -2,8 +2,10 @@ package com.lilpo.attendance_support_upgrade.controller;
 
 import com.lilpo.attendance_support_upgrade.dto.ApiResponse;
 import com.lilpo.attendance_support_upgrade.dto.request.AuthenticationRequest;
+import com.lilpo.attendance_support_upgrade.dto.request.AuthenticationWithRoleRequest;
 import com.lilpo.attendance_support_upgrade.dto.request.IntrospectRequest;
 import com.lilpo.attendance_support_upgrade.dto.response.AuthenticationResponse;
+import com.lilpo.attendance_support_upgrade.dto.response.AuthenticationWithRoleResponse;
 import com.lilpo.attendance_support_upgrade.dto.response.IntrospectResponse;
 import com.lilpo.attendance_support_upgrade.service.AuthenticationService;
 import com.nimbusds.jose.JOSEException;
@@ -28,6 +30,14 @@ public class AuthenticationController {
     ApiResponse<AuthenticationResponse> authenticate(@RequestBody AuthenticationRequest request) {
         var result = authenticationService.authenticate(request);
         return ApiResponse.<AuthenticationResponse>builder()
+                .result(result)
+                .build();
+    }
+
+    @PostMapping("/token-with-role")
+    ApiResponse<AuthenticationWithRoleResponse> authenticateWithRole(@RequestBody AuthenticationWithRoleRequest request) {
+        var result = authenticationService.authenticateWithRole(request);
+        return ApiResponse.<AuthenticationWithRoleResponse>builder()
                 .result(result)
                 .build();
     }

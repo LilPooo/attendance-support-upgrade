@@ -88,4 +88,13 @@ public class UserController {
                 .build();
     }
 
+    @GetMapping("/search")
+    public ApiResponse<List<UserResponse>> searchUser(
+            @RequestParam("keyword") String keyword,
+            @RequestParam(value = "size", required = false, defaultValue = "10") int size
+    ) {
+        return ApiResponse.<List<UserResponse>>builder()
+                .result(userService.searchUsersByName(keyword, size))
+                .build();
+    }
 }

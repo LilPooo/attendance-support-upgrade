@@ -113,8 +113,51 @@ public class CheckInService {
 
     }
 
-    public void teacherCheckIn(String username, Long classroomId) {
-        User user = userRepository.findByUsername(username)
+    public void studentCheckInByUserId(String userId, Long classroomId, String deviceId, double longitude, double latitude) {
+        // Tìm User dựa trên userId
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXISTED));
+
+        // Tìm Classroom dựa trên classroomId
+        Classroom classroom = classroomRepository.findById(classroomId)
+                .orElseThrow(() -> new AppException(ErrorCode.CLASSROOM_NOT_EXISTED));
+
+        // Kiểm tra Device ID
+//        if (!user.getDeviceId().equals(deviceId)) {
+//            throw new AppException(ErrorCode.INVALID_DEVICE_ID);
+//        }
+
+        // Kiểm tra thời gian điểm danh hợp lệ
+        LocalTime now = LocalTime.now();
+        if (now.isBefore(classroom.getStartRollCallTime()) || now.isAfter(classroom.getEndRollCallTime())) {
+            throw new AppException(ErrorCode.INVALID_ROLL_CALL_CHECK_IN);
+        }
+
+        // Tính khoảng cách giữa vị trí người dùng và classroom
+        double distance = calculateDistance(classroom.getLatitude(), classroom.getLongitude(), latitude, longitude);
+        if (distance > allowedDistance) {
+            throw new AppException(ErrorCode.USER_TOO_FAR_FROM_CLASSROOM);
+        }
+
+        // Kiểm tra và cập nhật trạng thái check-in
+        LocalDate today = LocalDate.now();
+        List<CheckIn> checkIns = checkInRepository.findByUserAndClassroomAndDate(user, classroom, today);
+
+        if (checkIns == null || checkIns.isEmpty()) {
+            throw new AppException(ErrorCode.USER_NOT_EXISTED);
+        }
+
+        for (CheckIn checkIn : checkIns) {
+            checkIn.setLatitudeUser(latitude);
+            checkIn.setLongitudeUser(longitude);
+            checkIn.setStatus(true);
+            checkInRepository.save(checkIn);
+        }
+    }
+
+
+    public void teacherCheckIn(String userId, Long classroomId, boolean status) {
+        User user = userRepository.findById(userId)
                 .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXISTED));
 
         Classroom classroom = classroomRepository.findById(classroomId)
@@ -128,7 +171,7 @@ public class CheckInService {
         }
 
         for (CheckIn checkIn : checkIns) {
-            checkIn.setStatus(true);
+            checkIn.setStatus(status);
         }
         checkInRepository.saveAll(checkIns);
 
