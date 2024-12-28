@@ -24,6 +24,7 @@ public enum ErrorCode {
     INVALID_ROLL_CALL_CHECK_IN(1015, "It is not the right time for check in", HttpStatus.BAD_REQUEST),
     USER_TOO_FAR_FROM_CLASSROOM(1016, "You are too far from the classroom", HttpStatus.BAD_REQUEST),
     CHECK_IN_RECORD_NOT_FOUND(1017, "Check in record not found", HttpStatus.NOT_FOUND),
+    USER_ALREADY_HAVE_CONVERSATION(1018, "2 users already have conversation", HttpStatus.BAD_REQUEST),
     ;
 
     private final int code;

@@ -24,6 +24,8 @@ public class Conversation {
 
     LocalDateTime createdAt;
 
+    boolean isGroup;
+
     @OneToMany(mappedBy = "conversation", cascade = CascadeType.ALL, orphanRemoval = true)
     Set<Message> messages;
 
