@@ -29,4 +29,14 @@ public class ConversationController {
                 .result(conversationService.findOneToOneConversation(userAId, userBId))
                 .build();
     }
+
+    @PostMapping("/create-one-to-one-username")
+    public ApiResponse<ConversationResponse> createOneToOneConversationUsername(
+            @RequestParam String userAId,
+            @RequestParam String usernameB
+    ) {
+        return ApiResponse.<ConversationResponse>builder()
+                .result(conversationService.findOneToOneConversationUsername(userAId, usernameB))
+                .build();
+    }
 }

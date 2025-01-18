@@ -18,6 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,6 +31,13 @@ public class ConversationService {
     ConversationParticipantRepository conversationParticipantRepository;
     UserRepository userRepository;
     ConversationMapper conversationMapper;
+
+    public ConversationResponse findOneToOneConversationUsername(String userAId, String usernameB) {
+        User userB = userRepository.findByUsername(usernameB)
+                .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXISTED));
+        return findOneToOneConversation(userAId, userB.getId());
+
+    }
 
     public ConversationResponse findOneToOneConversation(String userAId, String userBId) {
         Optional<Conversation> existingConversation = conversationRepository.findOneToOneConversation(userAId, userBId);
@@ -47,6 +55,7 @@ public class ConversationService {
                     .name(null)
                     .isGroup(false)
                     .createdAt(LocalDateTime.now())
+                    .participants(new HashSet<>())
                     .build();
             conversation = conversationRepository.save(conversation);
 
@@ -65,6 +74,10 @@ public class ConversationService {
                     .build();
 
             conversationParticipantRepository.saveAll(List.of(participantA, participantB));
+            conversation.getParticipants().add(participantA);
+            conversation.getParticipants().add(participantB);
+            conversation = conversationRepository.save(conversation); // Save again to persist participants
+
             log.info("Participant A: {}", participantA);
             log.info("Participant B: {}", participantB);
         }
