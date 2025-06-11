@@ -22,7 +22,9 @@ public class Classroom {
     Long id;
 
     String courseId;
+
     String address;
+
 
     LocalTime startTimeLearn;
     LocalTime endTimeLearn;

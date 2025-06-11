@@ -9,6 +9,9 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class OpenApiConfig {
+
+    //API for OPEN API swagger: http://localhost:8080/identity/swagger-ui/index.html
+
     @Bean
     public OpenAPI openAPI() {
         String securityScheme = "bearerAuth";

@@ -45,13 +45,11 @@ public class ClassroomService {
     //Get all classrooms using Pagination
     @PreAuthorize("hasRole('ADMIN')")
     public PageResponse<ClassroomResponse> getClassroomsPagination(int page, int size) {
-//        return classroomRepository.findAll().stream().map(classroomMapper::toClassroomResponse).toList();
         Sort sort = Sort.by("name").ascending();
         Pageable pageable = PageRequest.of(page - 1, size, sort);
         Page<Classroom> pageData = classroomRepository.findAll(pageable);
         List<ClassroomResponse> classroomResponses = pageData.getContent().stream()
                 .map(classroomMapper::toClassroomResponse).toList();
-
 
         return PageResponse.<ClassroomResponse>builder()
                 .currentPage(page)

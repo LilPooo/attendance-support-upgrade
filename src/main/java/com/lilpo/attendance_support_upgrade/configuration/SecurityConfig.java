@@ -26,9 +26,10 @@ public class SecurityConfig {
             "/users", "/auth/token", "/auth/introspect", "/auth/logout", "/auth/refresh",
             "auth/token-with-role",
             "/identity/swagger-ui/**", "/swagger-ui/**", "/swagger-resources/**", "/v3/api-docs/**",
-            "/swagger-ui.html/**",
-            "/identity/swagger-resources/**",
-            "/identity/v3/api-docs/**", "/identity/swagger-ui.html/**"
+            "/identity/v3/api-docs/**", "/identity/swagger-ui.html/**",
+            "/ws/**",
+            "/identity/ws/**",
+            "/notifications", "ws/notifications", "/notifications/**"
     };
 
     @Value("${jwt.signerKey}")
@@ -37,18 +38,16 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeHttpRequests(request ->
-                        request.requestMatchers(PUBLIC_ENDPOINTS).permitAll()
-//                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html").permitAll()
+                request.requestMatchers(PUBLIC_ENDPOINTS).permitAll()
 
-                                .anyRequest()
-                                .authenticated()
+                        .anyRequest()
+                        .authenticated()
         );
 
-        httpSecurity.oauth2ResourceServer(oauth2 ->
-                oauth2.jwt(jwtConfigurer ->
-                                jwtConfigurer.decoder(jwtDecoder())
-                                        .jwtAuthenticationConverter(jwtAuthenticationConverter()))
-                        .authenticationEntryPoint(new JwtAuthenticationEntryPoint())
+        httpSecurity.oauth2ResourceServer(oauth2 -> oauth2
+                .jwt(jwtConfigurer -> jwtConfigurer.decoder(jwtDecoder())
+                        .jwtAuthenticationConverter(jwtAuthenticationConverter()))
+                .authenticationEntryPoint(new JwtAuthenticationEntryPoint())
         );
 
         httpSecurity.csrf(AbstractHttpConfigurer::disable);
