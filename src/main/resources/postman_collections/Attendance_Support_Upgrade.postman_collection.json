@@ -1,0 +1,1841 @@
+{
+	"info": {
+		"_postman_id": "87291164-3a39-4107-805a-5a077c077d64",
+		"name": "Attendance Support Upgrade",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30503128"
+	},
+	"item": [
+		{
+			"name": "Identity Service",
+			"item": [
+				{
+					"name": "Authentication User",
+					"item": [
+						{
+							"name": "introspect",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"token\": \"eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJsaWxwby5jb20iLCJzdWIiOiJqYW1lczEwIiwiZXhwIjoxNzM0NDIxNzc1LCJjdXN0b21DbGFpbSI6IkN1c3RvbSIsImlhdCI6MTczNDQxODE3NX0.XyT5lunGt7sevbNwcTcMyRRAmQYW0ye4NLCnl2Fnpxu1uw6gIPuekhksnxlkg0H5M7IKRWuzfEAS0uTzPPQzDQ\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/identity/auth/introspect",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"identity",
+										"auth",
+										"introspect"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get token admin",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"admin\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/identity/auth/token",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"identity",
+										"auth",
+										"token"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get token user",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"james1\",\r\n    \"password\": \"12\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/identity/auth/token",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"identity",
+										"auth",
+										"token"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get token and role",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"james1\",\r\n    \"password\": \"123456\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/identity/auth/token-with-role",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"identity",
+										"auth",
+										"token-with-role"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "CRUD User",
+					"item": [
+						{
+							"name": "create User",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"chat4\",\r\n    \"password\": \"12\",\r\n    \"firstName\": \"Hoàng\",\r\n    \"lastName\": \"Long\",\r\n    \"phone\":\"0949946099\",\r\n    \"dob\": \"2000-04-08\",\r\n    \"gender\": 1,\r\n    \"major\":\"Computer Engineering\",\r\n    \"deviceId\":\"halu\",\r\n    \"roles\": [\r\n        \"USER\",\"STUDENT\"\r\n    ]   \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/identity/users",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"identity",
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update User",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJsaWxwby5jb20iLCJzdWIiOiJhZG1pbiIsImV4cCI6MTczNTM3NjEwNywiaWF0IjoxNzM1MzcyNTA3LCJzY29wZSI6IlJPTEVfQURNSU4ifQ.KJ0u1BLcMI-ZKgqD0h49QmdOgYVrJXJ6iNgAby1HeOFKVooyGUbfVaQsC669-7bKomvkoWScFuYWaYEC4qGtGw",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"tec\",\r\n    \"firstName\": \"Hoàng\",\r\n    \"password\": \"12\",\r\n    \"lastName\": \"Long\",\r\n    \"phone\": \"0949946099\",\r\n    \"dob\": \"2000-04-08\",\r\n    \"gender\": 1,\r\n    \"major\": \"Computer Engineering\",\r\n    \"deviceId\": \"halu\",\r\n    \"roles\": [\r\n        \"USER\",\"STUDENT\"\r\n    ] \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/identity/users/02d5a69b-e424-4b77-9ed9-01662b954d4e",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"identity",
+										"users",
+										"02d5a69b-e424-4b77-9ed9-01662b954d4e"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete User",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJsaWxwby5jb20iLCJzdWIiOiJhZG1pbiIsImV4cCI6MTczNDU5NzM1NCwiaWF0IjoxNzM0NTkzNzU0LCJzY29wZSI6IlJPTEVfQURNSU4gQUREX0ZSSUVORCJ9.DlyPxnqmQvBUhUsQPbLGLT61EtJMSm0hsvK5Rh-OgVNivOZaBvZnhFRc_l3UqkjJO8KUzfQyAA0MHRn79lAadw",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/identity/users/0cca073b-5350-460a-9a94-93adc153efbc",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"identity",
+										"users",
+										"0cca073b-5350-460a-9a94-93adc153efbc"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get User by Id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJsaWxwby5jb20iLCJzdWIiOiJqYW1lczEiLCJleHAiOjE3MzU1ODMxOTgsImlhdCI6MTczNTU3OTU5OCwic2NvcGUiOiJST0xFX1NUVURFTlQgQ0hFQ0tfSU4gUk9MRV9VU0VSIn0._YahbvzXzgCYXlmTNJaPuv26aRBQEJe4hClmP9EZ-yvOYd48g8pqJjOBK-MF-FnvF1FdlHwkfgnOGZKQ5zz4LA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/identity/users/2e6d22bb-ee5d-4957-b19e-5e0b4f0772c4",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"identity",
+										"users",
+										"2e6d22bb-ee5d-4957-b19e-5e0b4f0772c4"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get Users",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJsaWxwby5jb20iLCJzdWIiOiJhZG1pbiIsImV4cCI6MTc0OTY1OTM5NiwiaWF0IjoxNzQ5NjU1Nzk2LCJzY29wZSI6IlJPTEVfQURNSU4ifQ.VAt-wrI4WUZw2mKQSR5JbjRpX1FAjvFkdhvDjTVFe4BXTbs1AYJbnOrd4-OWnlAfa57OzkC5pZyPw8bByV82RA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/identity/users",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"identity",
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get Users Pagination",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJsaWxwby5jb20iLCJzdWIiOiJhZG1pbiIsImV4cCI6MTc0OTY1OTM5NiwiaWF0IjoxNzQ5NjU1Nzk2LCJzY29wZSI6IlJPTEVfQURNSU4ifQ.VAt-wrI4WUZw2mKQSR5JbjRpX1FAjvFkdhvDjTVFe4BXTbs1AYJbnOrd4-OWnlAfa57OzkC5pZyPw8bByV82RA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/identity/users/pagination?page=1&size=2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"identity",
+										"users",
+										"pagination"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "size",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "search user",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJsaWxwby5jb20iLCJzdWIiOiJhZG1pbiIsImV4cCI6MTczNDgxMTA3NSwiaWF0IjoxNzM0ODA3NDc1LCJzY29wZSI6IlJPTEVfQURNSU4gQUREX0ZSSUVORCJ9.iuPa441b8eaeBUfqDI7xoD6CpGI9CCDvmc9yzBIilYXy403c_O1b5XappqBymx7uUQdYWxnagxNlYYdPeRwgQg",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/identity/users/search?keyword=admin&size=4",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"identity",
+										"users",
+										"search"
+									],
+									"query": [
+										{
+											"key": "keyword",
+											"value": "admin"
+										},
+										{
+											"key": "size",
+											"value": "4"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get MyInfo",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJsaWxwby5jb20iLCJzdWIiOiJjaGF0MSIsImV4cCI6MTczNTM3NjIwMiwiaWF0IjoxNzM1MzcyNjAyLCJzY29wZSI6IlJPTEVfVVNFUiBST0xFX1NUVURFTlQgQ0hFQ0tfSU4ifQ.4PxgmVi9pKBlwsKaT64bJQpSHi-Evj-wVcBR2HuX3seLc7nRbrv__Nj656dVUGZ-BAfQnKN3In-TRSbllBflZg",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/identity/users/myInfo",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"identity",
+										"users",
+										"myInfo"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "CRUD User"
+				},
+				{
+					"name": "CRUD Permission",
+					"item": [
+						{
+							"name": "create Permission",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJsaWxwby5jb20iLCJzdWIiOiJhZG1pbiIsImV4cCI6MTczNTAyMzExMywiaWF0IjoxNzM1MDE5NTEzLCJzY29wZSI6IlJPTEVfQURNSU4ifQ.Ik3S2cCCaCQ_4drXdyLPELJhw0aSC94B4A4e3ICj9b6DEzMB2_lRZUCyk2Yi8SB2sQN6kkzxgkyAjDxUdOpbMg",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"CHECK_IN_MANUALLY\",\r\n    \"description\": \"Teacher can check in for student manually\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/identity/permissions",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"identity",
+										"permissions"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get Permissions",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJsaWxwby5jb20iLCJzdWIiOiJhZG1pbiIsImV4cCI6MTczNTAyMzExMywiaWF0IjoxNzM1MDE5NTEzLCJzY29wZSI6IlJPTEVfQURNSU4ifQ.Ik3S2cCCaCQ_4drXdyLPELJhw0aSC94B4A4e3ICj9b6DEzMB2_lRZUCyk2Yi8SB2sQN6kkzxgkyAjDxUdOpbMg",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/identity/permissions",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"identity",
+										"permissions"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete permission",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJsaWxwby5jb20iLCJzdWIiOiJhZG1pbiIsImV4cCI6MTczNDUwMzc5NywiaWF0IjoxNzM0NTAwMTk3LCJzY29wZSI6IiJ9.jcaUjyFk-VoUYlchXR-3KQyzr4ET_x4w9DP1jiudJ_-m8HSO3kAv6O5gj4B4rGLEwe4c70oJlAjIg1YlOfjv_A",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/identity/permissions/ADD_FRIENDD",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"identity",
+										"permissions",
+										"ADD_FRIENDD"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "CRUD Role",
+					"item": [
+						{
+							"name": "create Role",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJsaWxwby5jb20iLCJzdWIiOiJhZG1pbiIsImV4cCI6MTczNTAyMzExMywiaWF0IjoxNzM1MDE5NTEzLCJzY29wZSI6IlJPTEVfQURNSU4ifQ.Ik3S2cCCaCQ_4drXdyLPELJhw0aSC94B4A4e3ICj9b6DEzMB2_lRZUCyk2Yi8SB2sQN6kkzxgkyAjDxUdOpbMg",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"STUDENT\",\r\n    \"description\": \"Student role\",\r\n    \"permissions\" : [\"CHECK_IN\"]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/identity/roles",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"identity",
+										"roles"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get Roles",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJsaWxwby5jb20iLCJzdWIiOiJhZG1pbiIsImV4cCI6MTc0NDg3NzY3MCwiaWF0IjoxNzQ0ODc0MDcwLCJzY29wZSI6IlJPTEVfQURNSU4ifQ.dMLGgQPupn-Wfjxld4RaNc4QMNo6FGCsClmdjhh_27cGCZa41eipfqr27m7RnijUWLgjnLA2YV7I9EzzDrEbXA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/identity/roles",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"identity",
+										"roles"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete Role",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJsaWxwby5jb20iLCJzdWIiOiJhZG1pbiIsImV4cCI6MTczNTAyMzExMywiaWF0IjoxNzM1MDE5NTEzLCJzY29wZSI6IlJPTEVfQURNSU4ifQ.Ik3S2cCCaCQ_4drXdyLPELJhw0aSC94B4A4e3ICj9b6DEzMB2_lRZUCyk2Yi8SB2sQN6kkzxgkyAjDxUdOpbMg",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"USER\",\r\n    \"description\": \"User role\",\r\n    \"permissions\" : [\"READ_DATA\"]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/identity/roles/STUDENT",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"identity",
+										"roles",
+										"STUDENT"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "CRUD Classroom",
+					"item": [
+						{
+							"name": "create Classroom",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJsaWxwby5jb20iLCJzdWIiOiJhZG1pbiIsImV4cCI6MTczNDk4MjM1MCwiaWF0IjoxNzM0OTc4NzUwLCJzY29wZSI6IlJPTEVfQURNSU4ifQ.eb5Se9eIfYsTz9xX3buIsWpUNWmMJKqcqjfgqG9q1fEK5-UUiD2tPbIp_aJxi42yMT-FdtVouXc0NK-p7OloYw",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"courseId\": \"IT104\",\r\n    \"address\": \"D3 501\",\r\n    \"startTimeLearn\": \"08:00\",\r\n    \"endTimeLearn\": \"10:00\",\r\n    \"startRollCallTime\": \"07:50\",\r\n    \"endRollCallTime\": \"08:10\",\r\n    \"latitude\": 21.0075,\r\n    \"longitude\": 105.8412,\r\n    \"startWeek\": 1,\r\n    \"endWeek\": 15,\r\n    \"name\": \"AI\",\r\n    \"daysOfWeek\": [\r\n        \"MONDAY\",\r\n        \"WEDNESDAY\",\r\n        \"FRIDAY\"\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/identity/classrooms",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"identity",
+										"classrooms"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update Classroom",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJsaWxwby5jb20iLCJzdWIiOiJqYW1lczEiLCJleHAiOjE3MzUwNDcyMjYsImlhdCI6MTczNTA0MzYyNiwic2NvcGUiOiJST0xFX1NUVURFTlQgQ0hFQ0tfSU4gUk9MRV9VU0VSIn0.hmGJ517qS4Z9JGmlYP8dbsyPWVz3qMrEP1ykQ95HidOpaS-hmPhjXaOo2agUkY4H-k9aGVqDNF4ziqkb_GVLTg",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"courseId\": \"IT103\",\r\n    \"address\": \"D3 501\",\r\n    \"startTimeLearn\": \"08:00:00\",\r\n    \"endTimeLearn\": \"10:00:00\",\r\n    \"startRollCallTime\": \"07:50:00\",\r\n    \"endRollCallTime\": \"08:10:00\",\r\n    \"latitude\": 21.0075,\r\n    \"longitude\": 105.8412,\r\n    \"startWeek\": 1,\r\n    \"endWeek\": 15,\r\n    \"name\": \"Nhập môn 3\",\r\n      \"daysOfWeek\": [\r\n        \"THURSDAY\",\r\n        \"FRIDAY\"\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/identity/classrooms/5",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"identity",
+										"classrooms",
+										"5"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete Classroom",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJsaWxwby5jb20iLCJzdWIiOiJqYW1lczEiLCJleHAiOjE3MzQ1ODgxNTMsImlhdCI6MTczNDU4NDU1Mywic2NvcGUiOiIifQ.e1_b9nm8LUZvNYgYbMAogwujvgpHXQ6Vl3y9Fubk4w88BagQpx89XkZ5QFoAom1Lq4SDMuYZFNT5BFZgQ0W75w",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/identity/classrooms/2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"identity",
+										"classrooms",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get Classroom by Id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/identity/classrooms/4",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"identity",
+										"classrooms",
+										"4"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get all classrooms",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJsaWxwby5jb20iLCJzdWIiOiJhZG1pbiIsImV4cCI6MTczNDYwMzEyMywiaWF0IjoxNzM0NTk5NTIzLCJzY29wZSI6IlJPTEVfQURNSU4gQUREX0ZSSUVORCJ9.2XAple9bbUWkctRYyBczGGymTBdad1JzGp6OpXEPQOn3Jy-bX2SJH7nSHCFNTcvSoFVC_NptVQ1Mu8_7qZGIJg",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/identity/classrooms",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"identity",
+										"classrooms"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get classes Pagination",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJsaWxwby5jb20iLCJzdWIiOiJhZG1pbiIsImV4cCI6MTczNDk4MDU4MCwiaWF0IjoxNzM0OTc2OTgwLCJzY29wZSI6IlJPTEVfQURNSU4ifQ.F243yKjd8XbTWpsvn3VJ9Xhd8jTSYjL_3Tle-bFrtrPRZvRH6LL7bOAxMBnP9PyDRiF0kT08ABlKzRdLAKiUsA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/identity/classrooms/pagination?page=4&size=2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"identity",
+										"classrooms",
+										"pagination"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "4"
+										},
+										{
+											"key": "size",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "CRUD User-Classroom",
+					"item": [
+						{
+							"name": "add user(id)",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJsaWxwby5jb20iLCJzdWIiOiJhZG1pbiIsImV4cCI6MTczNTA3NzMyMiwiaWF0IjoxNzM1MDczNzIyLCJzY29wZSI6IlJPTEVfQURNSU4ifQ.-PN_QYMv37X14Dz2WR4XMCm-GN-sBkZTuBpyyTIior0PqV0i80gpFmgI4FciE2f5oU1ARAzYT8QAQVkfIeiPPg",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/identity/user-classrooms/3e67396e-eb2d-4882-a796-6f77e31acd91/9",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"identity",
+										"user-classrooms",
+										"3e67396e-eb2d-4882-a796-6f77e31acd91",
+										"9"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "add user(username)",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJsaWxwby5jb20iLCJzdWIiOiJhZG1pbiIsImV4cCI6MTczNDk4NjA0MiwiaWF0IjoxNzM0OTgyNDQyLCJzY29wZSI6IlJPTEVfQURNSU4ifQ.GUSyCSeYojDQXzGzSyUjblm6HVEDwAJTekg2zcBv3QCpu7sVUa48yUXNPX1Zg6jziR852LhMVrAQdhRJGFtGNg",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/identity/user-classrooms/add-by-username/james1/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"identity",
+										"user-classrooms",
+										"add-by-username",
+										"james1",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get schedule (username)",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJsaWxwby5jb20iLCJzdWIiOiJqYW1lczEiLCJleHAiOjE3MzUwNDkzODUsImlhdCI6MTczNTA0NTc4NSwic2NvcGUiOiJST0xFX1NUVURFTlQgQ0hFQ0tfSU4gUk9MRV9VU0VSIn0.9c0Zl9cc4QPdNobM20yAKErXhG8oivmNr6bbsslR-7Rd_AGlROdG7BozlI0zW06UYb0aQY5f4OEK5OH-YQY9zQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/identity/user-classrooms/schedule-by-username/james1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"identity",
+										"user-classrooms",
+										"schedule-by-username",
+										"james1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "remove user (username)",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJsaWxwby5jb20iLCJzdWIiOiJhZG1pbiIsImV4cCI6MTczNDk4NjA0MiwiaWF0IjoxNzM0OTgyNDQyLCJzY29wZSI6IlJPTEVfQURNSU4ifQ.GUSyCSeYojDQXzGzSyUjblm6HVEDwAJTekg2zcBv3QCpu7sVUa48yUXNPX1Zg6jziR852LhMVrAQdhRJGFtGNg",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"USER\",\r\n    \"description\": \"User role\",\r\n    \"permissions\" : [\"READ_DATA\"]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/identity/user-classrooms/add-by-username/james1/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"identity",
+										"user-classrooms",
+										"add-by-username",
+										"james1",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "remove user(id)",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJsaWxwby5jb20iLCJzdWIiOiJhZG1pbiIsImV4cCI6MTczNDYwMTkyNywiaWF0IjoxNzM0NTk4MzI3LCJzY29wZSI6IlJPTEVfQURNSU4gQUREX0ZSSUVORCJ9.DupezGHoAlrTjhA73jq6QukJnewi72jusYDm2Fs3SF_SdHIXAf0u3McoX6Oo7pQE3k_n23ydW1eqbJzlcEvkvg",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"USER\",\r\n    \"description\": \"User role\",\r\n    \"permissions\" : [\"READ_DATA\"]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/identity/user-classrooms/596c66e0-3429-4d49-ad63-eab3b8146da4/4",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"identity",
+										"user-classrooms",
+										"596c66e0-3429-4d49-ad63-eab3b8146da4",
+										"4"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get schedule (userId)",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJsaWxwby5jb20iLCJzdWIiOiJ0ZWMiLCJleHAiOjE3MzUwNzU5MjEsImlhdCI6MTczNTA3MjMyMSwic2NvcGUiOiJST0xFX1RFQUNIRVIgQUREX0ZSSUVORCBST0xFX1VTRVIifQ.UL_nXFhcFA-ysEn5Y0Ded_PXRY_veQpH_dyxXXPpg_vU9DMyQ9YgT0hgywoSpwjAa_94o_wFARHv4vLrkWFYww",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/identity/user-classrooms/schedule-by-userId/c5e0c1c4-b76d-47fd-b6bc-2efec361f627",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"identity",
+										"user-classrooms",
+										"schedule-by-userId",
+										"c5e0c1c4-b76d-47fd-b6bc-2efec361f627"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "CRUD CheckIn",
+					"item": [
+						{
+							"name": "update roll call time",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJsaWxwby5jb20iLCJzdWIiOiJhZG1pbiIsImV4cCI6MTczNDY3OTY1MCwiaWF0IjoxNzM0Njc2MDUwLCJzY29wZSI6IlJPTEVfQURNSU4gQUREX0ZSSUVORCJ9.m6el3Gxvm6jp7TqkIYZjUwPe5kPqIhn1Ke2o-_n2sPGN3aI8biut6le4j27Lc-J05Zrt4XBRx32lQoqsGioqVg",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"startRollCallTime\": \"01:50\",\r\n    \"endRollCallTime\": \"02:20\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/identity/check-in/update-roll-call-time/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"identity",
+										"check-in",
+										"update-roll-call-time",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create roll call session",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJsaWxwby5jb20iLCJzdWIiOiJhZG1pbiIsImV4cCI6MTczNTE4MjQ5OSwiaWF0IjoxNzM1MTc4ODk5LCJzY29wZSI6IlJPTEVfQURNSU4ifQ.xHcJ-QaYJNRxQ_bTUUq5PPdJYgbcoluLhnWUTCubbFZv254vP-fjVSstlPgcQLlp1ffeLQHXTgeTLsnzBTv7sA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"startRollCallTime\": \"00:50\",\r\n    \"endRollCallTime\": \"23:20\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/identity/check-in/create-roll-call-session/10",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"identity",
+										"check-in",
+										"create-roll-call-session",
+										"10"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Student check in",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJsaWxwby5jb20iLCJzdWIiOiJqYW1lczEiLCJleHAiOjE3MzUwNjkyNjksImlhdCI6MTczNTA2NTY2OSwic2NvcGUiOiJST0xFX1VTRVIgUk9MRV9TVFVERU5UIENIRUNLX0lOIn0.gxJcRn9K_uG0yfJtAz7Bg2eCUp-ShGLUg3Ar7P8OBuh6bx0Hi26SK6pqYiK_iN048pqeDw7PsV8B7gzx0i4RdQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"deviceId\": \"DEVICE12345\",\r\n    \"longitude\": 105.8412,\r\n    \"latitude\": 21.0075\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/identity/check-in/student/james1/10",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"identity",
+										"check-in",
+										"student",
+										"james1",
+										"10"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Student check in UserId",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJsaWxwby5jb20iLCJzdWIiOiJhZG1pbiIsImV4cCI6MTczNTE4MjQ5OSwiaWF0IjoxNzM1MTc4ODk5LCJzY29wZSI6IlJPTEVfQURNSU4ifQ.xHcJ-QaYJNRxQ_bTUUq5PPdJYgbcoluLhnWUTCubbFZv254vP-fjVSstlPgcQLlp1ffeLQHXTgeTLsnzBTv7sA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"deviceId\": \"DEVICE12345\",\r\n    \"longitude\": 105.8441871,\r\n    \"latitude\": 21.0013655\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/identity/check-in/student/using-userId/10/2e6d22bb-ee5d-4957-b19e-5e0b4f0772c4",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"identity",
+										"check-in",
+										"student",
+										"using-userId",
+										"10",
+										"2e6d22bb-ee5d-4957-b19e-5e0b4f0772c4"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Teacher check in manually",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJsaWxwby5jb20iLCJzdWIiOiJhZG1pbiIsImV4cCI6MTczNTE4NDg0NCwiaWF0IjoxNzM1MTgxMjQ0LCJzY29wZSI6IlJPTEVfQURNSU4ifQ.JJKRexZ6F2yzS-U_fCDngX7wMTRm8KekAI2phsz_Ts50Pm_UzTSfYV-hJSRX0HiQ5GSQ7TCbKLZGotku5yQxDg",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"deviceId\": \"DEVICE12345\",\r\n    \"longitude\": 105.8412,\r\n    \"latitude\": 21.0075\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/identity/check-in/teacher/5/af14a520-7b99-42fc-8ffa-f5c92fdff8a6?status=true",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"identity",
+										"check-in",
+										"teacher",
+										"5",
+										"af14a520-7b99-42fc-8ffa-f5c92fdff8a6"
+									],
+									"query": [
+										{
+											"key": "status",
+											"value": "true"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Statistic",
+					"item": [
+						{
+							"name": "getStudentAbsences",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJsaWxwby5jb20iLCJzdWIiOiJhZG1pbiIsImV4cCI6MTczNTEwODAxMCwiaWF0IjoxNzM1MTA0NDEwLCJzY29wZSI6IlJPTEVfQURNSU4ifQ.AtNIKqzqNq9UtVdpUNL8cwbVFwSJJzOFEVDvArXBubLqxjXFQ7VHmpm4K9D1SV0vsDQwaeQzfjgWzGKixJ31XQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/identity/statistics/student/absences/2e6d22bb-ee5d-4957-b19e-5e0b4f0772c4",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"identity",
+										"statistics",
+										"student",
+										"absences",
+										"2e6d22bb-ee5d-4957-b19e-5e0b4f0772c4"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get absences in a class",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJsaWxwby5jb20iLCJzdWIiOiJhZG1pbiIsImV4cCI6MTczNTExMDI1NSwiaWF0IjoxNzM1MTA2NjU1LCJzY29wZSI6IlJPTEVfQURNSU4ifQ.SJA4JgtN49oSZtGsa5OS0WWjXZefueqFO7uFu0dyojLzn7htbIGJ_-kvSFFtpGswlAZeCB7cLTD_-9iQv46LNg",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/identity/statistics/teacher/absences/classroom/5",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"identity",
+										"statistics",
+										"teacher",
+										"absences",
+										"classroom",
+										"5"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get absence date",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJsaWxwby5jb20iLCJzdWIiOiJhZG1pbiIsImV4cCI6MTczNTEwODAxMCwiaWF0IjoxNzM1MTA0NDEwLCJzY29wZSI6IlJPTEVfQURNSU4ifQ.AtNIKqzqNq9UtVdpUNL8cwbVFwSJJzOFEVDvArXBubLqxjXFQ7VHmpm4K9D1SV0vsDQwaeQzfjgWzGKixJ31XQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/identity/statistics/student/absences/dates/5/2e6d22bb-ee5d-4957-b19e-5e0b4f0772c4",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"identity",
+										"statistics",
+										"student",
+										"absences",
+										"dates",
+										"5",
+										"2e6d22bb-ee5d-4957-b19e-5e0b4f0772c4"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "CRUD Conversation",
+					"item": [
+						{
+							"name": "create 1-1 conver",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJsaWxwby5jb20iLCJzdWIiOiJhZG1pbiIsImV4cCI6MTczNTM3NzYzMiwiaWF0IjoxNzM1Mzc0MDMyLCJzY29wZSI6IlJPTEVfQURNSU4ifQ.R_Qo6wJFrZq8czMg3qX49e3UD-blgXkJWXTWDRePu_vIpMtAF5cUpPr9cA1iD_EjbmYx76WM5lY2yff90o2M0w",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/identity/conversation/create-one-to-one?userAId=2e6d22bb-ee5d-4957-b19e-5e0b4f0772c4&userBId=58c08b15-2a68-4d4c-9ffe-a6f83d9fd9bc",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"identity",
+										"conversation",
+										"create-one-to-one"
+									],
+									"query": [
+										{
+											"key": "userAId",
+											"value": "2e6d22bb-ee5d-4957-b19e-5e0b4f0772c4"
+										},
+										{
+											"key": "userBId",
+											"value": "58c08b15-2a68-4d4c-9ffe-a6f83d9fd9bc"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create 1-1 conver username",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJsaWxwby5jb20iLCJzdWIiOiJhZG1pbiIsImV4cCI6MTczNTU4OTc2OCwiaWF0IjoxNzM1NTg2MTY4LCJzY29wZSI6IlJPTEVfQURNSU4ifQ.dJ4GiynL2oe_IVwl5Y06-ZSpiH8HbGXRMpaUC69Gm5JcZQHH8iHspkTm_spQWHv7g01q3F_VXqn7gL1fvG12XQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/identity/conversation/create-one-to-one-username?userAId=2e6d22bb-ee5d-4957-b19e-5e0b4f0772c4&usernameB=james10",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"identity",
+										"conversation",
+										"create-one-to-one-username"
+									],
+									"query": [
+										{
+											"key": "userAId",
+											"value": "2e6d22bb-ee5d-4957-b19e-5e0b4f0772c4"
+										},
+										{
+											"key": "usernameB",
+											"value": "james10"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get list conversation 1 user",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJsaWxwby5jb20iLCJzdWIiOiJhZG1pbiIsImV4cCI6MTczNzI5NTk0NSwiaWF0IjoxNzM3MjkyMzQ1LCJzY29wZSI6IlJPTEVfQURNSU4ifQ.0x-qOAJeSGGvrHNFHfiyWjpPIgzLk5gj34pLDDLTp89fxjmaojh5G5XRND72MHyrG0IQgVNXwEBD5vTHGJ0qdQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"content\": \"I'm LilPo handsome. how about you?\",\r\n    \"senderId\": \"2e6d22bb-ee5d-4957-b19e-5e0b4f0772c4\",\r\n    \"receiverId\": \"4c27f74e-1bd5-4449-b588-abc6d033774a\",\r\n    \"conversationId\": 21\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/identity/conversation/list-chat?userId=2e6d22bb-ee5d-4957-b19e-5e0b4f0772c4&page=1&size=20",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"identity",
+										"conversation",
+										"list-chat"
+									],
+									"query": [
+										{
+											"key": "userId",
+											"value": "2e6d22bb-ee5d-4957-b19e-5e0b4f0772c4"
+										},
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "size",
+											"value": "20"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "CRUD Chat",
+					"item": [
+						{
+							"name": "send message",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJsaWxwby5jb20iLCJzdWIiOiJhZG1pbiIsImV4cCI6MTczNzI5MzEzMCwiaWF0IjoxNzM3Mjg5NTMwLCJzY29wZSI6IlJPTEVfQURNSU4ifQ.zZvzDI6o1cFKtE9tHruiVe5WbQ307vhQqOADxvNtkUv8l-z6Da2az5DJQ7BBiI8rE9Ok6xYlwy2zqSs96Cm_KA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"content\": \"Trĩ e xing tóa.\",\r\n    \"senderId\": \"2e6d22bb-ee5d-4957-b19e-5e0b4f0772c4\",\r\n    \"receiverId\": \"4c27f74e-1bd5-4449-b588-abc6d033774a\",\r\n    \"conversationId\": 21\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/identity/chat/send",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"identity",
+										"chat",
+										"send"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "chat history",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJsaWxwby5jb20iLCJzdWIiOiJhZG1pbiIsImV4cCI6MTczNzI5MzEzMCwiaWF0IjoxNzM3Mjg5NTMwLCJzY29wZSI6IlJPTEVfQURNSU4ifQ.zZvzDI6o1cFKtE9tHruiVe5WbQ307vhQqOADxvNtkUv8l-z6Da2az5DJQ7BBiI8rE9Ok6xYlwy2zqSs96Cm_KA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"content\": \"I'm LilPo handsome. how about you?\",\r\n    \"senderId\": \"2e6d22bb-ee5d-4957-b19e-5e0b4f0772c4\",\r\n    \"receiverId\": \"4c27f74e-1bd5-4449-b588-abc6d033774a\",\r\n    \"conversationId\": 21\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/identity/chat/history?senderId=2e6d22bb-ee5d-4957-b19e-5e0b4f0772c4&receiverId=4c27f74e-1bd5-4449-b588-abc6d033774a&page=1&size=20",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"identity",
+										"chat",
+										"history"
+									],
+									"query": [
+										{
+											"key": "senderId",
+											"value": "2e6d22bb-ee5d-4957-b19e-5e0b4f0772c4"
+										},
+										{
+											"key": "receiverId",
+											"value": "4c27f74e-1bd5-4449-b588-abc6d033774a"
+										},
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "size",
+											"value": "20"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "send message rep",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJsaWxwby5jb20iLCJzdWIiOiJhZG1pbiIsImV4cCI6MTczNzE5MjIyNCwiaWF0IjoxNzM3MTg4NjI0LCJzY29wZSI6IlJPTEVfQURNSU4ifQ.SuCk98C36dk_Z-67g0ZcsjRovMQQCM0W1E8RadgTUGbyDjRXEtm2t2bnxOcMj7fMW1HujMEBRgBHX_HXA3RKvQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"content\": \"Yes\",\r\n    \"senderId\": \"4c27f74e-1bd5-4449-b588-abc6d033774a\",\r\n    \"receiverId\": \"2e6d22bb-ee5d-4957-b19e-5e0b4f0772c4\",\r\n    \"conversationId\": 21\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/identity/chat/send",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"identity",
+										"chat",
+										"send"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "admin token",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"admin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/identity/auth/token",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"identity",
+								"auth",
+								"token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJsaWxwby5jb20iLCJzdWIiOiJhZG1pbiIsImV4cCI6MTc0OTY1OTM5NiwiaWF0IjoxNzQ5NjU1Nzk2LCJzY29wZSI6IlJPTEVfQURNSU4ifQ.VAt-wrI4WUZw2mKQSR5JbjRpX1FAjvFkdhvDjTVFe4BXTbs1AYJbnOrd4-OWnlAfa57OzkC5pZyPw8bByV82RA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/identity/swagger-ui.html#/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"identity",
+						"swagger-ui.html"
+					],
+					"hash": "/"
+				}
+			},
+			"response": []
+		}
+	]
+}
