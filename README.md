@@ -40,9 +40,55 @@ Swagger UI is integrated into the project to help you interact with and test the
    http://localhost:8080/identity/auth/token
    with "username": "admin", and "password" is also "admin". You will get a token, then you can use this token for other request.
 
+# Using Postman to test the API
+1. Download the Postman Collection:\
+You can find the Postman collection file in the project repository under the src/main/resources/postman_collections/Attendance_Support_Upgrade.postman_collection.json.
+2. Import the Collection into Postman
+Open Postman.
+
+- Click on the Import button (top-left of the window).
+
+- Select Choose Files and navigate to the Attendance_Support_Upgrade.postman_collection.json file you downloaded.
+
+- Click Open to import the collection into Postman.
+
+3. Test the API
+
+Once the collection is imported, you can start testing the available API endpoints.\
+
+For endpoints that require authentication, use the JWT token obtained from the `login API (POST /auth/token)` and add it to the Authorization tab in Postman as Bearer `<your-jwt-token>`.
+
+# Mobile Application (Flutter UI) 
+The **Attendance Support** project also includes a **mobile application** built with **Flutter**. The mobile app is designed to work seamlessly on both **Android** and **iOS** platforms.
+
+### Key Features of the Mobile App:
+- **Student Authentication**: Students can authenticate using their credentials, including a unique device ID and location-based authentication.
+- **Attendance Tracking**: Lecturers can easily create attendance sessions and monitor student attendance.
+- **Messaging**: The app enables real-time communication between lecturers and students through group chats or 1-to-1 messaging, utilizing WebSocket for real-time updates.
+- **Real-Time Notifications**: Push notifications inform students of new sessions, messages, or any updates related to their attendance or schedules.
+- **Cross-Platform**: The app is developed with Flutter, making it fully compatible with both **Android** and **iOS** devices.\
+  Here’s a look at some screens of the app:\
+  <div style="display: flex; justify-content: space-between;">
+    <img src="src/main/resources/images/ui_admin.jpg" alt="Login Screen" width="200"/>
+    <img src="src/main/resources/images/xem_tkb.jpg" alt="Attendance Screen" width="200"/>
+    <img src="src/main/resources/images/student_check_in.jpg" alt="Messages Screen" width="200"/>
+    <img src="src/main/resources/images/ui_gv_thong_ke.jpg" alt="Messages Screen" width="200"/>
+</div>
+
+
 # Notes
-Ensure that both MySQL and Redis are running on your local system before starting the application.\
+Ensure that both MySQL is running on your local system before starting the application.\
 You may want to use a .env file or an external configuration management system for production environments instead of hardcoding sensitive information (like database credentials).
+
+## Contact Information
+
+If you have any questions or would like to know more about the **Attendance Support** project, feel free to contact me at:
+
+- **Email**: [vuhoang4423@gmail.com](mailto:your-email@example.com)
+- **GitHub**: [https://github.com/LilPooo](https://github.com/LilPooo)
+- **LinkedIn**: [https://www.linkedin.com/in/hoang-trung-871226264/](https://www.linkedin.com/in/your-profile)
+
+I’m happy to answer any questions or provide more details about the project!
 
 
    
