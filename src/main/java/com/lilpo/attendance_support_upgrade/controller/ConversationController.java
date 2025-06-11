@@ -1,16 +1,15 @@
 package com.lilpo.attendance_support_upgrade.controller;
 
 import com.lilpo.attendance_support_upgrade.dto.ApiResponse;
+import com.lilpo.attendance_support_upgrade.dto.PageResponse;
+import com.lilpo.attendance_support_upgrade.dto.response.ConversationDetailResponse;
 import com.lilpo.attendance_support_upgrade.dto.response.ConversationResponse;
 import com.lilpo.attendance_support_upgrade.service.ConversationService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @Slf4j
@@ -38,5 +37,18 @@ public class ConversationController {
         return ApiResponse.<ConversationResponse>builder()
                 .result(conversationService.findOneToOneConversationUsername(userAId, usernameB))
                 .build();
+    }
+
+    @GetMapping("/list-chat")
+    public ApiResponse<PageResponse<ConversationDetailResponse>> getUserConversations(
+            @RequestParam String userId,
+            @RequestParam int page,
+            @RequestParam int size
+    ) {
+        PageResponse<ConversationDetailResponse> response = conversationService.getUserConversations(userId, page, size);
+        return ApiResponse.<PageResponse<ConversationDetailResponse>>builder()
+                .result(response)
+                .build();
+
     }
 }

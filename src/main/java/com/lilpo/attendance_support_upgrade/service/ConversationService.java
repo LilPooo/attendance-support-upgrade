@@ -1,5 +1,7 @@
 package com.lilpo.attendance_support_upgrade.service;
 
+import com.lilpo.attendance_support_upgrade.dto.PageResponse;
+import com.lilpo.attendance_support_upgrade.dto.response.ConversationDetailResponse;
 import com.lilpo.attendance_support_upgrade.dto.response.ConversationResponse;
 import com.lilpo.attendance_support_upgrade.entity.Conversation;
 import com.lilpo.attendance_support_upgrade.entity.ConversationParticipant;
@@ -15,6 +17,9 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -89,5 +94,18 @@ public class ConversationService {
         response.setParticipantIds(participantIds);
 
         return response;
+    }
+
+    public PageResponse<ConversationDetailResponse> getUserConversations(String userId, int page, int size) {
+        Pageable pageable = PageRequest.of(page - 1, size);
+        Page<ConversationDetailResponse> pageData = conversationRepository.findConversationsByUserId(userId, pageable);
+        List<ConversationDetailResponse> conversationDetails = pageData.getContent();
+        return PageResponse.<ConversationDetailResponse>builder()
+                .currentPage(page)
+                .pageSize(pageData.getSize())
+                .totalPages(pageData.getTotalPages())
+                .totalElements(pageData.getTotalElements())
+                .data(conversationDetails)
+                .build();
     }
 }

@@ -51,7 +51,6 @@ public class ClassroomService {
         List<ClassroomResponse> classroomResponses = pageData.getContent().stream()
                 .map(classroomMapper::toClassroomResponse).toList();
 
-
         return PageResponse.<ClassroomResponse>builder()
                 .currentPage(page)
                 .pageSize(pageData.getSize())
