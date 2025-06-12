@@ -14,8 +14,8 @@ Java SDK 21
 # Start application
 mvn spring-boot:run
 # Step Instructions
-1. Clone Repository
-  `git clone https://github.com/LilPooo/attendance-support-upgrade.git`
+1. Clone Repository\
+  `git clone https://github.com/LilPooo/attendance-support-upgrade.git`\
    `cd attendance-support-upgrade`
    
 2. Configure MySQL Database.\
@@ -31,11 +31,11 @@ mvn spring-boot:run
    `mvn spring-boot:run`
 # Using Swagger to Test the API
 Swagger UI is integrated into the project to help you interact with and test the API endpoints easily.\
-1. Access Swagger UI
+1. Access Swagger UI\
    After starting the backend application, open your browser and navigate to:\
    http://localhost:8080/identity/swagger-ui/index.html
    
-2. Test API Endpoint
+2. Test API Endpoint\
    Login admin:
    http://localhost:8080/identity/auth/token
    with "username": "admin", and "password" is also "admin". You will get a token, then you can use this token for other request.
@@ -54,7 +54,7 @@ Open Postman.
 
 3. Test the API
 
-Once the collection is imported, you can start testing the available API endpoints.\
+Once the collection is imported, you can start testing the available API endpoints.
 
 For endpoints that require authentication, use the JWT token obtained from the `login API (POST /auth/token)` and add it to the Authorization tab in Postman as Bearer `<your-jwt-token>`.
 
