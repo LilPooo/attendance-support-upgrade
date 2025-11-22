@@ -1,5 +1,6 @@
 package com.lilpo.attendance_support_upgrade.controller;
 
+import com.lilpo.attendance_support_upgrade.common.Const;
 import com.lilpo.attendance_support_upgrade.dto.ApiResponse;
 import com.lilpo.attendance_support_upgrade.dto.PageResponse;
 import com.lilpo.attendance_support_upgrade.dto.request.UserCreationRequest;
@@ -17,14 +18,14 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping(Const.BASE_URL + Const.USER_URL)
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @Slf4j
 public class UserController {
     UserService userService;
 
-    @PostMapping
+    @PostMapping(Const.CREATE_URL)
     ApiResponse<UserResponse> createUser(@RequestBody @Valid UserCreationRequest request) {
         return ApiResponse.<UserResponse>builder()
                 .result(userService.createUser(request))
@@ -60,14 +61,14 @@ public class UserController {
     }
 
 
-    @GetMapping("/{userId}")
-    ApiResponse<UserResponse> getUser(@PathVariable("userId") String userId) {
+    @GetMapping(Const.DETAIL_URL)
+    ApiResponse<UserResponse> detail(@PathVariable("userId") String userId) {
         return ApiResponse.<UserResponse>builder()
                 .result(userService.getUser(userId))
                 .build();
     }
 
-    @PutMapping("/{userId}")
+    @PutMapping(Const.UPDATE_URL)
     ApiResponse<UserResponse> updateUser(@PathVariable String userId, @RequestBody UserUpdateRequest request) {
         return ApiResponse.<UserResponse>builder()
                 .result(userService.updateUser(userId, request))
@@ -87,8 +88,8 @@ public class UserController {
                 .result(userService.getMyInfo())
                 .build();
     }
-
-    @GetMapping("/search")
+ 
+    @GetMapping(Const.SEARCH_URL)
     public ApiResponse<List<UserResponse>> searchUser(
             @RequestParam("keyword") String keyword,
             @RequestParam(value = "size", required = false, defaultValue = "10") int size
