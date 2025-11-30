@@ -29,7 +29,8 @@ public class SecurityConfig {
             "/identity/v3/api-docs/**", "/identity/swagger-ui.html/**",
             "/ws/**",
             "/identity/ws/**",
-            "/notifications", "ws/notifications", "/notifications/**"
+            "/notifications", "ws/notifications", "/notifications/**",
+            "identity/users/**"
     };
 
     @Value("${jwt.signerKey}")

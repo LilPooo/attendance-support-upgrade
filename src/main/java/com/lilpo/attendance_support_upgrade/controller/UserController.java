@@ -12,6 +12,7 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
@@ -60,6 +61,13 @@ public class UserController {
                 .build();
     }
 
+    @GetMapping("/get-all")
+    ApiResponse<PageResponse<UserResponse>> getAllUsers(Pageable pageable) {
+        return ApiResponse.<PageResponse<UserResponse>>builder()
+                .result(userService.getAllUsers(pageable))
+                .build();
+    }
+
 
     @GetMapping(Const.DETAIL_URL)
     ApiResponse<UserResponse> detail(@PathVariable("userId") String userId) {
@@ -88,7 +96,7 @@ public class UserController {
                 .result(userService.getMyInfo())
                 .build();
     }
- 
+
     @GetMapping(Const.SEARCH_URL)
     public ApiResponse<List<UserResponse>> searchUser(
             @RequestParam("keyword") String keyword,
