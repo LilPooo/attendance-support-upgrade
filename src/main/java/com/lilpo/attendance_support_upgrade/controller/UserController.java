@@ -67,8 +67,7 @@ public class UserController {
                 .result(userService.getAllUsers(pageable))
                 .build();
     }
-
-
+    
     @GetMapping(Const.DETAIL_URL)
     ApiResponse<UserResponse> detail(@PathVariable("userId") String userId) {
         return ApiResponse.<UserResponse>builder()
