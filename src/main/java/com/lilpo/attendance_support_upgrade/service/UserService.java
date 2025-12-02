@@ -85,6 +85,23 @@ public class UserService {
                 .build();
     }
 
+    //    @PreAuthorize("hasRole('ADMIN')")
+    public PageResponse<UserResponse> getAllUsers(Pageable pageable) {
+
+        Page<User> pageData = userRepository.findAll(pageable);
+
+        List<UserResponse> userResponses = pageData.getContent().stream()
+                .map(userMapper::toUserResponse)
+                .toList();
+        return PageResponse.<UserResponse>builder()
+//                .currentPage(page)
+                .totalPages(pageData.getTotalPages())
+                .pageSize(pageData.getSize())
+                .totalElements(pageData.getTotalElements())
+                .data(userResponses)
+                .build();
+    }
+
     @PostAuthorize("returnObject.username == authentication.name")
     public UserResponse getUser(String id) {
         return userMapper.toUserResponse(userRepository.findById(id)

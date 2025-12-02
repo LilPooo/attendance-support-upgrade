@@ -17,7 +17,7 @@ public class Const {
     public static final String FILE_EXCEL_EXTENSION = ".xlsx";
 
 
-    public static final String USER_URL = "/user";
+    public static final String USER_URL = "/users";
 
 
     public static final String SEARCH_URL_HISTORY = "/search-history";
