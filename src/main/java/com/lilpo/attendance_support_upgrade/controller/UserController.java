@@ -34,16 +34,12 @@ public class UserController {
     }
 
     @GetMapping
-    ApiResponse<List<UserResponse>> getUsers() {
+    List<UserResponse> getUsers() {
         var authentication = SecurityContextHolder.getContext().getAuthentication();
 
         log.info("Username: {}", authentication.getName());
         authentication.getAuthorities().forEach(grantedAuthority -> log.info(grantedAuthority.getAuthority()));
-
-
-        return ApiResponse.<List<UserResponse>>builder()
-                .result(userService.getUsers())
-                .build();
+        return userService.getUsers();
     }
 
     @GetMapping("/pagination")
@@ -67,7 +63,7 @@ public class UserController {
                 .result(userService.getAllUsers(pageable))
                 .build();
     }
-    
+
     @GetMapping(Const.DETAIL_URL)
     ApiResponse<UserResponse> detail(@PathVariable("userId") String userId) {
         return ApiResponse.<UserResponse>builder()
