@@ -84,9 +84,9 @@ You may want to use a .env file or an external configuration management system f
 
 If you have any questions or would like to know more about the **Attendance Support** project, feel free to contact me at:
 
-- **Email**: [vuhoang4423@gmail.com](mailto:your-email@example.com)
-- **GitHub**: [https://github.com/LilPooo](https://github.com/LilPooo)
-- **LinkedIn**: [https://www.linkedin.com/in/hoang-trung-871226264/](https://www.linkedin.com/in/your-profile)
+- **Email**:     [vuhoang4423@gmail.com](mailto:your-email@example.com)
+- **GitHub**:    [https://github.com/LilPooo](https://github.com/LilPooo)
+- **LinkedIn**:  [https://www.linkedin.com/in/hoang-trung-871226264/](https://www.linkedin.com/in/your-profile)
 
 I’m happy to answer any questions or provide more details about the project!
 
