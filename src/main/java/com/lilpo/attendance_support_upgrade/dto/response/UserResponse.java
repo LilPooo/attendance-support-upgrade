@@ -22,4 +22,5 @@ public class UserResponse {
     String major;
     String deviceId;
     Set<RoleResponse> roles;
+    String email;
 }

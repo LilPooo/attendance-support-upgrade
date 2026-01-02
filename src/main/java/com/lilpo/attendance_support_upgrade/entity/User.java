@@ -28,6 +28,8 @@ public class User {
     String major;
     String deviceId;
 
+    String email;
+
     @ManyToMany
     Set<Role> roles;
 
